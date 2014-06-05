@@ -24,21 +24,13 @@ var apiCall = function(endpoint, callback) {
 
 $(function() {
 	// Get API status
-	apiCall('/status', function(data, err) {
+	apiCall('/batch?pages=/status&pages=/company', function(data, err) {
 		if (err) {
 			return err;
 		}
 
 		// Update API status on index.html
-		$('#apiStatus').html(data.status);
-	});
-
-	// Get company infos
-	apiCall('/company', function(data, err) {
-		if (err) {
-			return err;
-		}
-
-		$('#companyName').html(data.name);
+		$('#apiStatus').html(data['/status'].status);
+		$('#companyName').html(data['/company'].name);
 	});
 });
