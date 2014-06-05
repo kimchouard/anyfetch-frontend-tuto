@@ -32,4 +32,13 @@ $(function() {
 		// Update API status on index.html
 		$('#apiStatus').html(data.status);
 	});
+
+	// Get company infos
+	apiCall('/company', function(data, err) {
+		if (err) {
+			return err;
+		}
+
+		$('#companyName').html(data.name);
+	});
 });
