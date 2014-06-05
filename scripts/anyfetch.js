@@ -6,9 +6,9 @@ var apiCall = function(endpoint, callback) {
 	$.ajax({
 			type: 'GET',
 			dataType: 'json',
-			url: 'https://api.anyfetch.com'+endpoint,
+			url: 'https://api.anyfetch.com' + endpoint,
 			headers: {
-				'Authorization': 'Basic '+login64
+				'Authorization': 'Basic ' + login64
 			}
 		})
 		// All went well
@@ -34,11 +34,12 @@ $(function() {
 		$('#companyName').html(data['/company'].name);
 
 		//Create the HTML code from the data
-		var docTypesHtml = '', provHtml = '';
-		$.each( data['/document_types'], function( key, value ) {
+		var docTypesHtml = '';
+		var provHtml = '';
+		$.each( data['/document_types'], function(key, value) {
 			docTypesHtml += '<li>'+value.name+'</li>'
 		});
-		$.each( data['/providers'], function( key, value ) {
+		$.each( data['/providers'], function(key, value) {
 			provHtml += '<li>'+value.name+'</li>'
 		});
 		// Update documents types and providers list
