@@ -24,13 +24,25 @@ var apiCall = function(endpoint, callback) {
 
 $(function() {
 	// Get API status
-	apiCall('/batch?pages=/status&pages=/company', function(data, err) {
+	apiCall('/batch?pages=/status&pages=/company&pages=/document_types&pages=/providers', function(data, err) {
 		if (err) {
 			return err;
 		}
 
-		// Update API status on index.html
+		// Update API status & Company name on index.html
 		$('#apiStatus').html(data['/status'].status);
 		$('#companyName').html(data['/company'].name);
+
+		//Create the HTML code from the data
+		var docTypesHtml = '', provHtml = '';
+		$.each( data['/document_types'], function( key, value ) {
+			docTypesHtml += '<li>'+value.name+'</li>'
+		});
+		$.each( data['/providers'], function( key, value ) {
+			provHtml += '<li>'+value.name+'</li>'
+		});
+		// Update documents types and providers list
+		$('#docTypes').html(docTypesHtml);
+		$('#provs').html(provHtml);
 	});
 });
